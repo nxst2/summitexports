@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
@@ -23,76 +23,183 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
+    /* 헤더 및 내비게이션 스타일 개선 */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      transition: all 0.3s ease;
+    }
+    
+    .header-container {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-button {
+      position: relative;
+      user-select: none;
+      -webkit-user-drag: none;
+      white-space: nowrap;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      color: white;
+    }
+    
+    .btn-primary {
+      background-color: transparent;
+      color: white;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: white;
+    }
+    
+    .btn-transparent {
+      background-color: transparent;
+      color: white;
+    }
+    
+    /* 헤더 스크롤 상태 */
+    .header-scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .header-scrolled .nav-logo {
+      color: #2563eb;
+    }
+    
+    .header-scrolled .nav-link {
+      color: #1f2937;
+    }
+    
+    .header-scrolled .nav-link:hover {
+      color: #2563eb;
+    }
+    
+    .header-scrolled .btn-transparent,
+    .header-scrolled .btn-outline {
+      border-color: #d1d5db;
+      color: #4b5563;
+    }
+    
+    .header-scrolled .btn-primary {
+      background-color: #2563eb;
+      border-color: #2563eb;
+      color: white;
+    }
+    
+    .header-scrolled .btn-outline:hover,
+    .header-scrolled .btn-transparent:hover {
+      background-color: #f3f4f6;
+    }
+    
+    @media (max-width: 1024px) {
+      .header-container {
+        padding: 1rem;
+      }
+    }
   </style>
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- Config Variables -->
+  <script>
+    // Company Profile Configuration - Edit this to update the profile URL site-wide
+    const COMPANY_PROFILE_PATH = "./download/Summit_Exports_LTD_Introduction_ENG.pdf";
+  </script>
 </head>
 <body class="font-sans antialiased bg-gray-50">
   <div class="overflow-x-hidden w-full">
-    <!-- 네비게이션 바 -->
-    <nav class="fixed top-0 w-full z-50 transition-all duration-300">
-      <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
-        <div class="flex justify-between items-center py-4">
-          <div>
-            <a href="#" class="text-xl font-bold text-white nav-logo">Summit Exports</a>
-          </div>
+    <!-- 새로운 헤더 디자인 -->
+    <header class="header">
+      <div class="container mx-auto header-container">
+        <!-- 로고 -->
+        <a href="#" class="text-xl font-bold text-white nav-logo flex items-center">
+          <span>Summit Exports</span>
+        </a>
+        
+        <!-- 데스크탑 메뉴 -->
+        <div class="hidden lg:flex items-center space-x-8">
+          <nav class="flex space-x-6">
+            <a href="#about" class="nav-link text-white hover:text-blue-200 transition-colors">About Us</a>
+            <a href="#it" class="nav-link text-white hover:text-blue-200 transition-colors">IT Consulting</a>
+            <a href="#ecommerce" class="nav-link text-white hover:text-blue-200 transition-colors">E-commerce</a>
+            <a href="#kbrand" class="nav-link text-white hover:text-blue-200 transition-colors">K-Brand</a>
+            <a href="#kgoods" class="nav-link text-white hover:text-blue-200 transition-colors">K-goods</a>
+            <a href="#shop" class="nav-link text-white hover:text-blue-200 transition-colors">SHOP</a>
+          </nav>
           
-          <!-- 모바일 메뉴 버튼 -->
-          <button class="lg:hidden text-white" id="mobile-menu-button">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-
-          <!-- 데스크톱 메뉴 -->
-          <div class="hidden lg:flex space-x-8">
-            <a href="#about" class="text-white hover:text-blue-200 nav-link">회사소개</a>
-            <a href="#it" class="text-white hover:text-blue-200 nav-link">IT 컨설팅</a>
-            <a href="#ecommerce" class="text-white hover:text-blue-200 nav-link">E-commerce</a>
-            <a href="#kbrand" class="text-white hover:text-blue-200 nav-link">K브랜드</a>
-            <a href="#kgoods" class="text-white hover:text-blue-200 nav-link">K-goods</a>
-            <a href="#shop" class="text-white hover:text-blue-200 nav-link">SHOP</a>
-          </div>
-
-          <!-- 데스크톱 버튼 -->
-          <div class="hidden lg:flex items-center space-x-4">
-            <a href="/download/company_profile.pdf" download class="nav-download-btn flex items-center text-white px-4 py-2 rounded-lg border border-white/30 hover:bg-white/10 transition-all duration-300">
+          <!-- 네비게이션 버튼 -->
+          <div class="nav-buttons flex items-center space-x-3">
+            <a href="#" onclick="downloadCompanyProfile(event)" class="nav-button btn-outline" draggable="false">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
-              회사소개서
+              <span>Company Profile</span>
             </a>
-            <a href="#contact" class="nav-contact-btn glass-effect text-white px-6 py-2 rounded-lg hover:bg-white/20 transition-all duration-300">
-              문의하기
+            <a href="#contact" class="nav-button btn-transparent" draggable="false">
+              <span>Contact Us</span>
             </a>
-            <a href="https://buy.stripe.com/6oEdTk2vg6E8exW8wC" class="nav-contact-btn glass-effect text-white px-6 py-2 rounded-lg hover:bg-white/20 transition-all duration-300">
-              결제하기
+            <a href="https://buy.stripe.com/6oEdTk2vg6E8exW8wC" class="nav-button btn-primary" draggable="false">
+              <span>Payment</span>
             </a>
           </div>
         </div>
-
-        <!-- 모바일 메뉴 -->
-        <div class="hidden lg:hidden bg-white/95 absolute left-0 right-0 p-4 shadow-lg" id="mobile-menu">
-          <div class="flex flex-col space-y-4">
-            <a href="#about" class="text-gray-800 hover:text-blue-600">회사소개</a>
-            <a href="#it" class="text-gray-800 hover:text-blue-600">IT 컨설팅</a>
-            <a href="#ecommerce" class="text-gray-800 hover:text-blue-600">E-commerce</a>
-            <a href="#kbrand" class="text-gray-800 hover:text-blue-600">K브랜드</a>
-            <a href="#kgoods" class="text-gray-800 hover:text-blue-600">K-goods</a>
-            <a href="#shop" class="text-gray-800 hover:text-blue-600">SHOP</a>
-            <div class="pt-4 border-t border-gray-200">
-              <a href="/download/company_profile.pdf" download class="block text-gray-800 hover:text-blue-600 mb-2">
-                회사소개서 다운로드
-              </a>
-              <a href="#contact" class="block text-gray-800 hover:text-blue-600 mb-2">
-                문의하기
-              </a>
-              <a href="https://buy.stripe.com/6oEdTk2vg6E8exW8wC" class="block text-gray-800 hover:text-blue-600">
-                결제하기
-              </a>
-            </div>
+        
+        <!-- 모바일 메뉴 버튼 -->
+        <button class="lg:hidden text-white focus:outline-none" id="mobile-menu-button">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- 모바일 메뉴 -->
+      <div class="hidden lg:hidden bg-white/95 absolute left-0 right-0 p-4 shadow-lg" id="mobile-menu">
+        <div class="flex flex-col space-y-4">
+          <a href="#about" class="text-gray-800 hover:text-blue-600">About Us</a>
+          <a href="#it" class="text-gray-800 hover:text-blue-600">IT Consulting</a>
+          <a href="#ecommerce" class="text-gray-800 hover:text-blue-600">E-commerce</a>
+          <a href="#kbrand" class="text-gray-800 hover:text-blue-600">K-Brand</a>
+          <a href="#kgoods" class="text-gray-800 hover:text-blue-600">K-goods</a>
+          <a href="#shop" class="text-gray-800 hover:text-blue-600">SHOP</a>
+          <div class="pt-4 border-t border-gray-200">
+            <a href="#" onclick="downloadCompanyProfile(event)" class="block text-gray-800 hover:text-blue-600 mb-2">
+              Download Company Profile
+            </a>
+            <a href="#contact" class="block text-gray-800 hover:text-blue-600 mb-2">
+              Contact Us
+            </a>
+            <a href="https://buy.stripe.com/6oEdTk2vg6E8exW8wC" class="block text-gray-800 hover:text-blue-600">
+              Payment
+            </a>
           </div>
         </div>
       </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center relative overflow-hidden pt-24 md:pt-16">
@@ -103,25 +210,25 @@
              sizes="(max-width: 600px) 400px, 800px"
              alt="Hong Kong Skyline" 
              class="w-full h-full object-cover">
-        <!-- 검정색 오버레이 50% 투명도 -->
+        <!-- Black overlay with 50% opacity -->
         <div class="absolute inset-0 bg-black/70"></div>
       </div>
       
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full text-center relative z-10">
         <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-          <span class="text-blue-500">IT·E-commerce</span> 전문가 컨설팅<br>
-          <span class="text-blue-500">K브랜드</span> & <span class="text-blue-500">K-goods</span> 수출 전문
+          <span class="text-blue-500">IT·E-commerce</span> Expert Consulting<br>
+          <span class="text-blue-500">K-Brand</span> & <span class="text-blue-500">K-goods</span> Export Specialists
         </h1>
         <p class="text-xl text-white/80 max-w-3xl mx-auto mb-10">
-          홍콩 기반 글로벌 비즈니스 전문 기업으로 IT 솔루션부터<br>
-          K브랜드 해외 진출까지 원스톱 서비스를 제공합니다
+          Hong Kong-based global business experts providing one-stop services<br>
+          from IT solutions to K-Brand international expansion
         </p>
         <div class="flex justify-center space-x-4 mt-12">
           <a href="#contact" class="glass-effect text-white px-8 py-4 rounded-full hover:bg-white/20 transition-all">
-            문의 시작하기 →
+            Start Inquiry →
           </a>
           <a href="#about" class="bg-white text-blue-700 px-8 py-4 rounded-full hover:bg-blue-50 transition-all">
-            더 알아보기
+            Learn More
           </a>
         </div>
         
@@ -132,8 +239,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
               </svg>
             </div>
-            <h3 class="text-white font-semibold mb-2">IT 컨설팅</h3>
-            <p class="text-white/80 text-sm">최첨단 기술 솔루션</p>
+            <h3 class="text-white font-semibold mb-2">IT Consulting</h3>
+            <p class="text-white/80 text-sm">Cutting-edge Technology Solutions</p>
           </div>
           <div class="glass-effect rounded-xl p-6 hover-scale">
             <div class="w-16 h-16 mx-auto mb-4">
@@ -142,7 +249,7 @@
               </svg>
             </div>
             <h3 class="text-white font-semibold mb-2">E-commerce</h3>
-            <p class="text-white/80 text-sm">온라인 유통 최적화</p>
+            <p class="text-white/80 text-sm">Online Distribution Optimization</p>
           </div>
           <div class="glass-effect rounded-xl p-6 hover-scale">
             <div class="w-16 h-16 mx-auto mb-4">
@@ -150,8 +257,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
               </svg>
             </div>
-            <h3 class="text-white font-semibold mb-2">K브랜드</h3>
-            <p class="text-white/80 text-sm">글로벌 브랜드 전략</p>
+            <h3 class="text-white font-semibold mb-2">K-Brand</h3>
+            <p class="text-white/80 text-sm">Global Brand Strategy</p>
           </div>
           <div class="glass-effect rounded-xl p-6 hover-scale">
             <div class="w-16 h-16 mx-auto mb-4">
@@ -160,7 +267,7 @@
               </svg>
             </div>
             <h3 class="text-white font-semibold mb-2">K-goods</h3>
-            <p class="text-white/80 text-sm">프리미엄 상품 수출</p>
+            <p class="text-white/80 text-sm">Premium Product Export</p>
           </div>
         </div>
       </div>
@@ -179,13 +286,13 @@
             <img src="img/hongkong.jpg" alt="Hong Kong" class="rounded-2xl shadow-2xl hover-scale">
             <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-lg w-64">
               <h3 class="text-blue-600 font-bold mb-2">20+ Years</h3>
-              <p class="text-sm text-gray-600">글로벌 무역 경험</p>
+              <p class="text-sm text-gray-600">Global Trade Experience</p>
             </div>
           </div>
           <div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">홍콩 기반 글로벌 전문가</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Hong Kong-based Global Experts</h2>
             <p class="text-lg text-gray-600 leading-relaxed mb-8">
-              홍콩에 기반을 둔 저희 회사는 IT 및 E-commerce 컨설팅, K브랜드와 K-goods를 세계 시장과 연결하는 전문 수출 기업입니다. 아시아의 금융 중심지인 홍콩의 전략적 위치와 글로벌 네트워크를 활용하여 한국 기업의 세계화를 지원합니다.
+              Our Hong Kong-based company specializes in IT and E-commerce consulting, connecting K-Brands and K-goods to the global market. We leverage Hong Kong's strategic position as Asia's financial hub and our global network to support Korean companies in their internationalization.
             </p>
             <div class="grid grid-cols-2 gap-6 mb-8">
               <div class="flex items-center">
@@ -195,8 +302,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold">50+ 국가</h3>
-                  <p class="text-sm text-gray-500">글로벌 네트워크</p>
+                  <h3 class="font-semibold">50+ Countries</h3>
+                  <p class="text-sm text-gray-500">Global Network</p>
                 </div>
               </div>
               <div class="flex items-center">
@@ -206,8 +313,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold">200+ 기업</h3>
-                  <p class="text-sm text-gray-500">파트너십 구축</p>
+                  <h3 class="font-semibold">200+ Companies</h3>
+                  <p class="text-sm text-gray-500">Partnerships Built</p>
                 </div>
               </div>
               <div class="flex items-center">
@@ -217,8 +324,8 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold">100% 신뢰</h3>
-                  <p class="text-sm text-gray-500">고객 만족도</p>
+                  <h3 class="font-semibold">100% Trust</h3>
+                  <p class="text-sm text-gray-500">Customer Satisfaction</p>
                 </div>
               </div>
               <div class="flex items-center">
@@ -228,14 +335,14 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold">30+ 산업</h3>
-                  <p class="text-sm text-gray-500">전문 분야</p>
+                  <h3 class="font-semibold">30+ Industries</h3>
+                  <p class="text-sm text-gray-500">Specialized Fields</p>
                 </div>
               </div>
             </div>
             <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
-              <h3 class="text-blue-800 font-semibold mb-2">비전</h3>
-              <p class="text-gray-700">혁신적인 솔루션과 글로벌 네트워크를 통해 한국의 우수한 브랜드와 상품을 세계에 알리고, 지속 가능한 성장을 지원하는 신뢰받는 파트너가 되는 것입니다.</p>
+              <h3 class="text-blue-800 font-semibold mb-2">Vision</h3>
+              <p class="text-gray-700">To become a trusted partner that introduces exceptional Korean brands and products to the world through innovative solutions and global networks, supporting sustainable growth.</p>
             </div>
           </div>
         </div>
@@ -246,8 +353,8 @@
     <section id="it" class="min-h-[80vh] py-20 bg-gray-900 text-white">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
         <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold mb-4">차세대 IT 솔루션</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">최신 기술 트렌드와 전문 노하우를 바탕으로 맞춤형 IT 솔루션을 제공합니다</p>
+          <h2 class="text-3xl font-bold mb-4">Next-Generation IT Solutions</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">We provide customized IT solutions based on the latest technology trends and expert know-how</p>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
           <div class="bg-gray-800 p-8 rounded-2xl hover-scale">
@@ -256,26 +363,26 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">시스템 통합/구축/관리</h3>
-            <p class="text-gray-400 mb-6">비즈니스 요구에 최적화된 IT 인프라 설계부터 구축, 안정적 운영까지 원스톱 서비스</p>
+            <h3 class="text-xl font-bold mb-4">System Integration/Implementation/Management</h3>
+            <p class="text-gray-400 mb-6">One-stop service from designing IT infrastructure optimized for business needs to implementation and stable operation</p>
             <ul class="space-y-2 text-gray-400">
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                클라우드 인프라 구축
+                Cloud Infrastructure Setup
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                서버 최적화 및 관리
+                Server Optimization & Management
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                데이터 보안 솔루션
+                Data Security Solutions
               </li>
             </ul>
           </div>
@@ -285,26 +392,26 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">응용 소프트웨어 개발</h3>
-            <p class="text-gray-400 mb-6">맞춤형 소프트웨어 개발을 통해 비즈니스 프로세스 자동화 및 효율성 극대화</p>
+            <h3 class="text-xl font-bold mb-4">Application Software Development</h3>
+            <p class="text-gray-400 mb-6">Maximizing efficiency and automating business processes through customized software development</p>
             <ul class="space-y-2 text-gray-400">
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                웹/모바일 애플리케이션
+                Web/Mobile Applications
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                ERP/CRM 시스템 구축
+                ERP/CRM System Implementation
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                사용자 경험 최적화
+                User Experience Optimization
               </li>
             </ul>
           </div>
@@ -314,33 +421,33 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">AI/VR/메타버스</h3>
-            <p class="text-gray-400 mb-6">최신 기술을 활용한 혁신적인 비즈니스 솔루션 구축으로 미래 경쟁력 강화</p>
+            <h3 class="text-xl font-bold mb-4">AI/VR/Metaverse</h3>
+            <p class="text-gray-400 mb-6">Enhancing future competitiveness by building innovative business solutions using the latest technologies</p>
             <ul class="space-y-2 text-gray-400">
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                AI 기반 분석 솔루션
+                AI-based Analytics Solutions
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                VR/AR 마케팅 플랫폼
+                VR/AR Marketing Platforms
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                메타버스 비즈니스 환경 구축
+                Metaverse Business Environment Setup
               </li>
             </ul>
           </div>
         </div>
         <div class="mt-16 text-center">
           <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors">
-            IT 컨설팅 문의하기
+            Inquire About IT Consulting
           </a>
         </div>
       </div>
@@ -350,8 +457,8 @@
     <section id="ecommerce" class="min-h-screen py-20 bg-white">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
         <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold text-gray-800 mb-4">E-commerce 종합 관리</h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">국내외 이커머스 시장 진출부터 효율적인 운영까지 전 과정을 지원합니다</p>
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">E-commerce Comprehensive Management</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">We support the entire process from entering domestic and international e-commerce markets to efficient operations</p>
         </div>
         <div class="flex flex-col lg:flex-row items-center gap-12 mb-16">
           <div class="lg:w-1/2">
@@ -363,8 +470,8 @@
                       <span class="text-orange-600 font-bold">1</span>
                     </div>
                     <div>
-                      <h3 class="font-bold">시장 분석</h3>
-                      <p class="text-gray-600 text-sm">글로벌 이커머스 시장 트렌드 및 경쟁사 분석</p>
+                      <h3 class="font-bold">Market Analysis</h3>
+                      <p class="text-gray-600 text-sm">Global e-commerce market trends and competitor analysis</p>
                     </div>
                   </div>
                   <div class="flex items-center gap-4">
@@ -372,8 +479,8 @@
                       <span class="text-orange-600 font-bold">2</span>
                     </div>
                     <div>
-                      <h3 class="font-bold">플랫폼 최적화</h3>
-                      <p class="text-gray-600 text-sm">각 마켓플레이스별 맞춤형 전략 수립</p>
+                      <h3 class="font-bold">Platform Optimization</h3>
+                      <p class="text-gray-600 text-sm">Customized strategies for each marketplace</p>
                     </div>
                   </div>
                   <div class="flex items-center gap-4">
@@ -381,8 +488,8 @@
                       <span class="text-orange-600 font-bold">3</span>
                     </div>
                     <div>
-                      <h3 class="font-bold">운영 관리</h3>
-                      <p class="text-gray-600 text-sm">효율적인 재고 및 주문 처리 시스템 구축</p>
+                      <h3 class="font-bold">Operational Management</h3>
+                      <p class="text-gray-600 text-sm">Efficient inventory and order processing system setup</p>
                     </div>
                   </div>
                   <div class="flex items-center gap-4">
@@ -390,8 +497,8 @@
                       <span class="text-orange-600 font-bold">4</span>
                     </div>
                     <div>
-                      <h3 class="font-bold">마케팅 최적화</h3>
-                      <p class="text-gray-600 text-sm">전환율 향상을 위한 디지털 마케팅 전략</p>
+                      <h3 class="font-bold">Marketing Optimization</h3>
+                      <p class="text-gray-600 text-sm">Digital marketing strategies to improve conversion rates</p>
                     </div>
                   </div>
                 </div>
@@ -399,35 +506,35 @@
             </div>
           </div>
           <div class="lg:w-1/2">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6">국내 유통 및 해외 수출입</h3>
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">Domestic Distribution and International Import/Export</h3>
             <p class="text-gray-600 leading-relaxed mb-8">
-              국내 이커머스 플랫폼부터 글로벌 마켓플레이스까지 다양한 채널을 통해 제품을 효과적으로 유통하고 성공적인 수출 전략을 수립합니다.
+              We effectively distribute products through various channels from domestic e-commerce platforms to global marketplaces, and develop successful export strategies.
             </p>
             <div class="bg-blue-50 p-6 rounded-xl mb-6">
-              <h4 class="font-semibold text-blue-800 mb-3">글로벌 마켓 지원</h4>
+              <h4 class="font-semibold text-blue-800 mb-3">Global Market Support</h4>
               <ul class="space-y-2">
                 <li class="flex items-center">
                   <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                   </svg>
-                  <span class="text-gray-700">아마존, 이베이, 쇼피 등 글로벌 플랫폼 입점</span>
+                  <span class="text-gray-700">Listing on global platforms like Amazon, eBay, Shopee</span>
                 </li>
                 <li class="flex items-center">
                   <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                   </svg>
-                  <span class="text-gray-700">국가별 규제 및 통관 프로세스 관리</span>
+                  <span class="text-gray-700">Management of country-specific regulations and customs processes</span>
                 </li>
                 <li class="flex items-center">
                   <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                   </svg>
-                  <span class="text-gray-700">글로벌 물류 및 결제 시스템 연동</span>
+                  <span class="text-gray-700">Integration of global logistics and payment systems</span>
                 </li>
               </ul>
             </div>
             <a href="#contact" class="inline-block bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg transition-colors">
-              E-commerce 컨설팅 문의
+              E-commerce Consulting Inquiry
             </a>
           </div>
         </div>
@@ -440,25 +547,25 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold mb-4">OEM / ODM</h3>
-            <p class="text-gray-600 mb-6">제품 기획부터 생산까지 맞춤형 개발 서비스</p>
+            <p class="text-gray-600 mb-6">Customized development services from product planning to production</p>
             <ul class="space-y-2 text-gray-600">
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                제품 커스터마이징
+                Product Customization
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                생산 공정 효율화
+                Production Process Optimization
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                품질 관리 시스템
+                Quality Management Systems
               </li>
             </ul>
           </div>
@@ -468,26 +575,26 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">국내 이커머스 운영</h3>
-            <p class="text-gray-600 mb-6">이커머스 비즈니스의 성공적인 운영 전략</p>
+            <h3 class="text-xl font-bold mb-4">Domestic E-commerce Operations</h3>
+            <p class="text-gray-600 mb-6">Successful operational strategies for e-commerce businesses</p>
             <ul class="space-y-2 text-gray-600">
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                스토어 디자인 최적화
+                Store Design Optimization
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                판매 전략 수립
+                Sales Strategy Development
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                고객 경험 최적화
+                Customer Experience Optimization
               </li>
             </ul>
           </div>
@@ -497,26 +604,26 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">전문가 컨설팅</h3>
-            <p class="text-gray-600 mb-6">이커머스 성공을 위한 맞춤형 전문 컨설팅</p>
+            <h3 class="text-xl font-bold mb-4">Expert Consulting</h3>
+            <p class="text-gray-600 mb-6">Customized professional consulting for e-commerce success</p>
             <ul class="space-y-2 text-gray-600">
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                진입 전략 수립
+                Entry Strategy Development
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                성과 분석 및 개선
+                Performance Analysis and Improvement
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                데이터 기반 의사결정
+                Data-Driven Decision Making
               </li>
             </ul>
           </div>
@@ -528,8 +635,8 @@
     <section id="kbrand" class="min-h-screen py-20 bg-blue-50">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
         <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold text-gray-800 mb-4">K브랜드 세계화 파트너</h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">글로벌 시장 진출을 위한 종합 에이전시</p>
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">K-Brand Global Partner</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive agency for global market entry</p>
         </div>
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div class="relative">
@@ -541,7 +648,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                   </svg>
                 </div>
-                <h3 class="text-xl font-bold">브랜드 발굴 → 글로벌 진출</h3>
+                <h3 class="text-xl font-bold">Brand Discovery → Global Expansion</h3>
               </div>
               <ul class="space-y-4">
                 <li class="flex items-center">
@@ -550,7 +657,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <span class="text-gray-700">국내 유망 브랜드 발굴</span>
+                  <span class="text-gray-700">Discover promising domestic brands</span>
                 </li>
                 <li class="flex items-center">
                   <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
@@ -558,7 +665,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <span class="text-gray-700">브랜드 포지셔닝 전략 수립</span>
+                  <span class="text-gray-700">Brand positioning strategy development</span>
                 </li>
                 <li class="flex items-center">
                   <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
@@ -566,7 +673,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <span class="text-gray-700">타겟 시장 조사 및 분석</span>
+                  <span class="text-gray-700">Target market research and analysis</span>
                 </li>
                 <li class="flex items-center">
                   <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
@@ -574,7 +681,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <span class="text-gray-700">현지화 마케팅 전략</span>
+                  <span class="text-gray-700">Localized marketing strategies</span>
                 </li>
                 <li class="flex items-center">
                   <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4">
@@ -582,28 +689,28 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <span class="text-gray-700">브랜드 인지도 확대 캠페인</span>
+                  <span class="text-gray-700">Brand awareness expansion campaigns</span>
                 </li>
               </ul>
             </div>
           </div>
           <div class="space-y-6">
             <div class="p-6 bg-white rounded-xl shadow-lg hover-scale">
-              <h3 class="text-lg font-semibold mb-2">해외 시장 분석</h3>
-              <p class="text-gray-600">목표 시장의 트렌드, 경쟁 환경, 소비자 선호도를 분석하여 최적화된 진입 전략을 수립합니다.</p>
+              <h3 class="text-lg font-semibold mb-2">International Market Analysis</h3>
+              <p class="text-gray-600">We analyze trends, competitive environments, and consumer preferences in target markets to develop optimized entry strategies.</p>
             </div>
             <div class="p-6 bg-white rounded-xl shadow-lg hover-scale">
-              <h3 class="text-lg font-semibold mb-2">협업 네트워킹</h3>
-              <p class="text-gray-600">현지 유통 파트너, 미디어, 인플루언서와의 네트워크를 구축하여 진출 기반을 마련합니다.</p>
+              <h3 class="text-lg font-semibold mb-2">Collaborative Networking</h3>
+              <p class="text-gray-600">We build networks with local distribution partners, media, and influencers to establish a foundation for market entry.</p>
             </div>
             <div class="p-6 bg-white rounded-xl shadow-lg hover-scale">
-              <h3 class="text-lg font-semibold mb-2">글로벌 마케팅</h3>
-              <p class="text-gray-600">글로벌 소비자의 마음을 사로잡는 차별화된 브랜드 스토리텔링과 마케팅 전략을 제공합니다.</p>
+              <h3 class="text-lg font-semibold mb-2">Global Marketing</h3>
+              <p class="text-gray-600">We provide differentiated brand storytelling and marketing strategies that capture the hearts of global consumers.</p>
             </div>
             <div class="p-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white shadow-lg hover-scale">
-              <h3 class="text-lg font-semibold mb-2">해외 브랜드 국내 진출</h3>
-              <p class="text-white/80">해외 유망 브랜드의 국내 시장 진출을 위한 종합 서비스도 제공합니다.</p>
-              <a href="#contact" class="inline-block mt-4 text-white underline">문의하기 →</a>
+              <h3 class="text-lg font-semibold mb-2">International Brand Entry to Domestic Market</h3>
+              <p class="text-white/80">We also provide comprehensive services for international brands entering the Korean market.</p>
+              <a href="#contact" class="inline-block mt-4 text-white underline">Contact Us →</a>
             </div>
           </div>
         </div>
@@ -611,72 +718,72 @@
         <div class="mt-20 bg-white rounded-2xl shadow-xl overflow-hidden">
           <div class="grid md:grid-cols-3">
             <div class="p-8 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-              <h3 class="text-xl font-bold mb-4">종합 브랜드 지원</h3>
-              <p class="mb-6">브랜드 에이전시로서 성공적인 글로벌 진출을 위한 모든 단계를 지원합니다.</p>
+              <h3 class="text-xl font-bold mb-4">Comprehensive Brand Support</h3>
+              <p class="mb-6">As a brand agency, we support all stages for successful global expansion.</p>
               <div class="space-y-3">
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start">
+                  <svg class="w-5 h-5 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
-                  <span>시장 조사부터 현지 정착까지</span>
+                  <span class="text-sm sm:text-base break-words">From market research to local establishment</span>
                 </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start">
+                  <svg class="w-5 h-5 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
-                  <span>글로벌 파트너 네트워크</span>
+                  <span class="text-sm sm:text-base break-words">Global partner network</span>
                 </div>
-                <div class="flex items-center">
-                  <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start">
+                  <svg class="w-5 h-5 mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
-                  <span>맞춤형 진출 전략</span>
+                  <span class="text-sm sm:text-base break-words">Customized expansion strategies</span>
                 </div>
               </div>
             </div>
             <div class="p-8 col-span-2">
-              <h3 class="text-xl font-bold text-gray-800 mb-4">브랜드 협업 사례</h3>
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Brand Collaboration Cases</h3>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                   <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span class="text-blue-600 font-bold">A</span>
                   </div>
-                  <p class="text-sm text-gray-600">화장품 브랜드<br>동남아 진출</p>
+                  <p class="text-sm text-gray-600">Cosmetics Brand<br>Southeast Asia Entry</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                   <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span class="text-blue-600 font-bold">B</span>
                   </div>
-                  <p class="text-sm text-gray-600">패션 브랜드<br>유럽 시장 확장</p>
+                  <p class="text-sm text-gray-600">Fashion Brand<br>European Market Expansion</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                   <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span class="text-blue-600 font-bold">C</span>
                   </div>
-                  <p class="text-sm text-gray-600">푸드 브랜드<br>북미 진출</p>
+                  <p class="text-sm text-gray-600">Food Brand<br>North America Entry</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                   <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span class="text-blue-600 font-bold">D</span>
                   </div>
-                  <p class="text-sm text-gray-600">가전 브랜드<br>중동 시장 개척</p>
+                  <p class="text-sm text-gray-600">Electronics Brand<br>Middle East Market Entry</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                   <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span class="text-blue-600 font-bold">E</span>
                   </div>
-                  <p class="text-sm text-gray-600">리빙 브랜드<br>일본 시장 진출</p>
+                  <p class="text-sm text-gray-600">Living Brand<br>Japanese Market Entry</p>
                 </div>
                 <div class="bg-gray-100 rounded-lg p-4 text-center">
                   <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
                     <span class="text-blue-600 font-bold">+</span>
                   </div>
-                  <p class="text-sm text-gray-600">다양한 산업<br>글로벌 협업</p>
+                  <p class="text-sm text-gray-600">Various Industries<br>Global Collaboration</p>
                 </div>
               </div>
               <div class="mt-6 text-center">
                 <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
-                  브랜드 협업 문의하기
+                  Contact for Brand Collaboration
                 </a>
               </div>
             </div>
@@ -689,80 +796,80 @@
     <section id="kgoods" class="min-h-screen py-20 bg-white">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
         <div class="text-center mb-16">
-          <h2 class="text-3xl font-bold text-gray-800 mb-4">K-Goods 수출 서비스</h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">글로벌 시장을 선도하는 K-goods 수출 전문기업</p>
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">K-Goods Export Services</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Specialized K-goods export company leading the global market</p>
         </div>
         
         <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
           <div class="order-2 lg:order-1">
             <div class="space-y-8">
               <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-xl hover-scale">
-                <h3 class="text-xl font-bold text-blue-800 mb-4">해외 시장 개척</h3>
+                <h3 class="text-xl font-bold text-blue-800 mb-4">Overseas Market Development</h3>
                 <ul class="space-y-3">
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    현지 시장 조사 및 분석
+                    Local market research and analysis
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    맞춤형 수출 전략 수립
+                    Customized export strategy development
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    현지 파트너십 구축
+                    Local partnership building
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    국가별 인증 및 규제 대응
+                    Country-specific certification and regulatory compliance
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    유통 채널 최적화
+                    Distribution Channel Optimization
                   </li>
                 </ul>
               </div>
               <div class="bg-gradient-to-r from-emerald-50 to-emerald-100 p-6 rounded-xl hover-scale">
-                <h3 class="text-xl font-bold text-emerald-800 mb-4">글로벌 경쟁력 강화</h3>
+                <h3 class="text-xl font-bold text-emerald-800 mb-4">Global Competitiveness Enhancement</h3>
                 <ul class="space-y-3">
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    제품 현지화 지원
+                    Product Localization Support
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    마케팅 전략 수립
+                    Marketing Strategy Development
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    브랜딩 및 패키징 최적화
+                    Branding and Packaging Optimization
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    가격 경쟁력 확보
+                    Price Competitiveness Ensuring
                   </li>
                   <li class="flex items-center text-gray-700">
                     <svg class="w-5 h-5 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
-                    지속적인 품질 관리
+                    Continuous Quality Management
                   </li>
                 </ul>
               </div>
@@ -775,42 +882,42 @@
         
         <div class="bg-gray-50 rounded-3xl p-10 shadow-lg">
           <div class="text-center mb-10">
-            <h3 class="text-2xl font-bold text-gray-800">K-Goods 수출 프로세스</h3>
-            <p class="text-gray-600 mt-2">체계적인 프로세스로 성공적인 해외 진출을 지원합니다</p>
+            <h3 class="text-2xl font-bold text-gray-800">K-Goods Export Process</h3>
+            <p class="text-gray-600 mt-2">We support successful global market entry through a systematic process</p>
           </div>
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white p-6 rounded-xl shadow-md">
               <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <span class="text-blue-600 font-bold">1</span>
               </div>
-              <h4 class="font-bold mb-2">시장 조사</h4>
-              <p class="text-gray-600 text-sm">목표 시장 분석 및 경쟁사 조사를 통한 기회 발굴</p>
+              <h4 class="font-bold mb-2">Market Research</h4>
+              <p class="text-gray-600 text-sm">Target market analysis and competitor research to discover opportunities</p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-md">
               <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <span class="text-blue-600 font-bold">2</span>
               </div>
-              <h4 class="font-bold mb-2">전략 수립</h4>
-              <p class="text-gray-600 text-sm">맞춤형 수출 전략 및 유통 채널 선정</p>
+              <h4 class="font-bold mb-2">Strategy Development</h4>
+              <p class="text-gray-600 text-sm">Customized export strategy and distribution channel selection</p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-md">
               <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <span class="text-blue-600 font-bold">3</span>
               </div>
-              <h4 class="font-bold mb-2">현지화</h4>
-              <p class="text-gray-600 text-sm">제품 및 마케팅 현지화를 통한 시장 적합성 강화</p>
+              <h4 class="font-bold mb-2">Localization</h4>
+              <p class="text-gray-600 text-sm">Enhancing market fit through product and marketing localization</p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-md">
               <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <span class="text-blue-600 font-bold">4</span>
               </div>
-              <h4 class="font-bold mb-2">지속 성장</h4>
-              <p class="text-gray-600 text-sm">판매 데이터 분석과 지속적인 시장 확장</p>
+              <h4 class="font-bold mb-2">Sustainable Growth</h4>
+              <p class="text-gray-600 text-sm">Sales data analysis and continuous market expansion</p>
             </div>
           </div>
           <div class="mt-8 text-center">
             <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors">
-              수출 상담 문의하기
+              Request Export Consultation
             </a>
           </div>
         </div>
@@ -832,7 +939,7 @@
                 </svg>
               </div>
               <h2 class="text-3xl font-bold text-gray-800 mb-4">SHOP</h2>
-              <p class="text-gray-600 text-lg mb-8">현재 SHOP 페이지를 준비 중입니다.<br>최고의 K-goods를 곧 만나보세요!</p>
+              <p class="text-gray-600 text-lg mb-8">We are currently preparing the SHOP page.<br>Experience the best K-goods soon!</p>
               
               <div class="grid md:grid-cols-3 gap-4 max-w-xl mx-auto mb-10">
                 <div class="bg-gray-100 p-4 rounded-xl">
@@ -866,101 +973,132 @@
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
         <div class="max-w-4xl mx-auto bg-gray-800 rounded-2xl p-12 shadow-2xl">
           <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4">문의하기</h2>
-            <p class="text-gray-400">전문 컨설턴트가 24시간 내 답변드립니다</p>
+            <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+            <p class="text-gray-400">Our team will get back to you within 24 hours</p>
           </div>
-          <form id="contactForm" onsubmit="return handleSubmit(event)" class="space-y-6">
-            <input 
-              type="text" 
-              id="company"
-              name="company" 
-              class="w-full px-6 py-4 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" 
-              placeholder="회사명" 
-              required
-            >
-            <input 
-              type="text" 
-              id="name"
-              name="name" 
-              class="w-full px-6 py-4 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" 
-              placeholder="담당자명" 
-              required
-            >
-            <input 
-              type="email" 
-              id="email"
-              name="email" 
-              class="w-full px-6 py-4 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" 
-              placeholder="이메일" 
-              required
-            >
-            <select 
-              id="type"
-              name="type" 
-              class="w-full px-6 py-4 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" 
-              required
-            >
-              <option value="">문의 유형 선택</option>
-              <option value="IT 컨설팅">IT 컨설팅</option>
-              <option value="E-commerce 문의">E-commerce 문의</option>
-              <option value="K브랜드 에이전시">K브랜드 에이전시</option>
-              <option value="K-goods 수출">K-goods 수출</option>
-              <option value="기타 문의">기타 문의</option>
-            </select>
-            <textarea 
-              id="message"
-              name="message" 
-              class="w-full px-6 py-4 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" 
-              placeholder="문의 내용" 
-              required
-            ></textarea>
-            <div class="flex items-center">
+          <form id="contactForm" action="https://formsubmit.co/kevinj@summitexportslimited.com" method="POST" class="space-y-6">
+            <!-- FormSubmit Configuration -->
+            <input type="hidden" name="_subject" value="New Inquiry from Summit Exports Website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://summitexportslimited.com/?thanks=true">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company Name</label>
+                <input 
+                  type="text" 
+                  id="company"
+                  name="company" 
+                  class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none border border-gray-600 placeholder-gray-400 transition-all" 
+                  placeholder="Your company name" 
+                  required
+                >
+              </div>
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                <input 
+                  type="text" 
+                  id="name"
+                  name="name" 
+                  class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none border border-gray-600 placeholder-gray-400 transition-all" 
+                  placeholder="Your full name" 
+                  required
+                >
+              </div>
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+              <input 
+                type="email" 
+                id="email"
+                name="email" 
+                class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none border border-gray-600 placeholder-gray-400 transition-all" 
+                placeholder="your.email@company.com" 
+                required
+              >
+            </div>
+            
+            <div>
+              <label for="type" class="block text-sm font-medium text-gray-300 mb-1">What can we help you with?</label>
+              <select 
+                id="type"
+                name="inquiry_type" 
+                class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none border border-gray-600 placeholder-gray-400 transition-all text-gray-300" 
+                required
+              >
+                <option value="" class="text-gray-400">Please select an option</option>
+                <option value="IT Consulting">IT Consulting</option>
+                <option value="E-commerce Management">E-commerce Management</option>
+                <option value="K-Brand Agency">K-Brand Agency</option>
+                <option value="K-goods Export">K-goods Export</option>
+                <option value="Business Partnership">Business Partnership</option>
+                <option value="Other Inquiry">Other Inquiry</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Your Message</label>
+              <textarea 
+                id="message"
+                name="message" 
+                class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none border border-gray-600 placeholder-gray-400 transition-all min-h-[150px]" 
+                placeholder="Please describe how we can assist you..." 
+                required
+              ></textarea>
+            </div>
+            
+            <div class="flex items-center space-x-3 bg-gray-700/50 p-4 rounded-lg">
               <input 
                 type="checkbox" 
                 id="privacy" 
-                name="privacy"
+                name="privacy_agreement"
+                class="w-5 h-5 accent-blue-500 cursor-pointer"
                 required
               >
-              <label for="privacy" class="ml-2">개인정보 수집 및 이용에 동의합니다.</label>
+              <label for="privacy" class="text-gray-300 text-sm">I agree to the privacy policy and consent to being contacted about my inquiry.</label>
             </div>
+            
             <button 
               type="submit" 
-              class="w-full px-6 py-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              class="w-full px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 font-medium flex items-center justify-center space-x-2"
             >
-              문의 보내기
+              <span>Get in Touch</span>
+              </svg>
             </button>
           </form>
           
-          <div class="grid md:grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-700">
+          <div class="grid md:grid-cols-3 gap-8 mt-12 pt-12 border-t border-gray-700">
             <div class="text-center">
-              <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
               </div>
-              <h3 class="text-lg font-semibold mb-2">전화 문의</h3>
+              <h3 class="text-lg font-semibold mb-2">Phone</h3>
               <p class="text-gray-400">+82 10-4532-9705</p>
             </div>
             <div class="text-center">
-              <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
               </div>
-              <h3 class="text-lg font-semibold mb-2">이메일</h3>
+              <h3 class="text-lg font-semibold mb-2">Email</h3>
               <p class="text-gray-400">kevinj@summitexportslimited.com</p>
             </div>
             <div class="text-center">
-              <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
               </div>
-              <h3 class="text-lg font-semibold mb-2">주소</h3>
-              <p class="text-gray-400"> Room 409 BEVERLEY  COMMERCIAL CENTRE<br>
-                                        87-105 CHATHAM ROAD SOUTH<br>
-                                        TSIM SHA TSUI<br>HONG KONG</p>
+              <h3 class="text-lg font-semibold mb-2">Address</h3>
+              <p class="text-gray-400">Room 409 BEVERLEY COMMERCIAL CENTRE<br>
+                                      87-105 CHATHAM ROAD SOUTH<br>
+                                      TSIM SHA TSUI<br>HONG KONG</p>
             </div>
           </div>
         </div>
@@ -970,12 +1108,11 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
-        <div class="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 class="text-xl font-bold mb-4">Summit Exports Ltd</h3>
-            <p class="text-gray-400 mb-6">글로벌 비즈니스의 새로운 기준을 제시합니다.</p>
-            <div class="flex space-x-4">
-
+        <div class="flex flex-col md:flex-row justify-center items-center md:items-start md:justify-around gap-8 mb-8">
+          <div class="text-center md:text-left">
+            <h3 class="text-xl font-bold mb-2">Summit Exports Ltd</h3>
+            <p class="text-gray-400 mb-6">Setting new standards for global business.</p>
+            <div class="flex justify-center md:justify-start space-x-4">
               <!--
               <a href="#" class="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center hover:bg-blue-600/30">
                 <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
@@ -1001,13 +1138,13 @@
               </a> -->
             </div>
           </div>
-
-          <div>
-            <h3 class="font-semibold mb-4">법적 정보</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li><button onclick="openModal('terms')" class="hover:text-white transition-colors">이용약관</button></li>
-              <li><button onclick="openModal('privacy')" class="hover:text-white transition-colors">개인정보처리방침</button></li>
-              <li><button onclick="openModal('cookie')" class="hover:text-white transition-colors">쿠키 정책</button></li>
+          
+          <div class="text-center md:text-left">
+            <h3 class="font-semibold mb-3">Legal Information</h3>
+            <ul class="flex flex-col md:items-start space-y-2 text-gray-400">
+              <li><button onclick="openModal('terms')" class="hover:text-white transition-colors">Terms of Use</button></li>
+              <li><button onclick="openModal('privacy')" class="hover:text-white transition-colors">Privacy Policy</button></li>
+              <li><button onclick="openModal('cookie')" class="hover:text-white transition-colors">Cookie Policy</button></li>
             </ul>
           </div>
         </div>
@@ -1017,62 +1154,47 @@
       </div>
     </footer>
     
-    <!-- 스크롤 버튼 -->
+    <!-- Scroll Button -->
     <a href="#hero" class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-80 hover:opacity-100 transition-opacity z-[1000]">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
       </svg>
     </a>
     
-    <!-- 간단한 스크립트 -->
+    <!-- Simple Script -->
     <script>
-      // 스크롤 시 네비게이션 바 스타일 변경
+      // Change navigation bar style on scroll
       window.addEventListener('scroll', function() {
-        const nav = document.querySelector('nav');
-        const navLogo = document.querySelector('.nav-logo');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const contactBtns = document.querySelectorAll('.nav-contact-btn');
-        const downloadBtn = document.querySelector('.nav-download-btn');
+        const header = document.querySelector('.header');
         
         if (window.scrollY > 50) {
-          nav.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
-          navLogo.classList.remove('text-white');
-          navLogo.classList.add('text-blue-600');
-          navLinks.forEach(link => {
-            link.classList.remove('text-white', 'hover:text-blue-200');
-            link.classList.add('text-gray-700', 'hover:text-blue-600');
-          });
-          contactBtns.forEach(btn => {
-            btn.classList.remove('glass-effect', 'text-white', 'hover:bg-white/20');
-            btn.classList.add('bg-blue-600', 'hover:bg-blue-700', 'text-white');
-          });
-          // 다운로드 버튼 스타일 변경
-          downloadBtn.classList.remove('text-white', 'border-white/30', 'hover:bg-white/10');
-          downloadBtn.classList.add('text-gray-700', 'border-gray-300', 'hover:bg-gray-100');
+          header.classList.add('header-scrolled');
         } else {
-          nav.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm');
-          navLogo.classList.remove('text-blue-600');
-          navLogo.classList.add('text-white');
-          navLinks.forEach(link => {
-            link.classList.remove('text-gray-700', 'hover:text-blue-600');
-            link.classList.add('text-white', 'hover:text-blue-200');
-          });
-          contactBtns.forEach(btn => {
-            btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-            btn.classList.add('glass-effect', 'text-white', 'hover:bg-white/20');
-          });
-          // 다운로드 버튼 스타일 복원
-          downloadBtn.classList.remove('text-gray-700', 'border-gray-300', 'hover:bg-gray-100');
-          downloadBtn.classList.add('text-white', 'border-white/30', 'hover:bg-white/10');
+          header.classList.remove('header-scrolled');
         }
+      });
+      
+      // Mobile Menu Toggle
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      // Close mobile menu when links are clicked
+      document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
       });
     </script>
 
-    <!-- 모달 컨테이너들 -->
+    <!-- Modal Containers -->
     <div id="terms-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
       <div class="bg-white rounded-xl max-w-2xl mx-4 p-6 max-h-[80vh] overflow-y-auto">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold text-gray-900">이용약관</h3>
+          <h3 class="text-xl font-bold text-gray-900">Terms of Use</h3>
           <button onclick="closeModal('terms')" class="text-gray-500 hover:text-gray-700">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -1080,18 +1202,18 @@
           </button>
         </div>
         <div class="prose prose-sm text-gray-600">
-          <h4 class="font-bold mb-2">제1조 (목적)</h4>
-          <p class="mb-4">본 약관은 Summit Exports Ltd(이하 "회사")가 제공하는 서비스의 이용조건 및 절차, 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+          <h4 class="font-bold mb-2">Article 1 (Purpose)</h4>
+          <p class="mb-4">These terms and conditions define the terms of use and procedures of the services provided by Summit Exports Ltd (hereinafter "the Company"), as well as the rights, obligations, and responsibilities between the Company and users.</p>
           
-          <h4 class="font-bold mb-2">제2조 (용어의 정의)</h4>
-          <p class="mb-4">본 약관에서 사용하는 용어의 정의는 다음과 같습니다.</p>
+          <h4 class="font-bold mb-2">Article 2 (Definition of Terms)</h4>
+          <p class="mb-4">The definitions of terms used in these terms and conditions are as follows.</p>
           <ul class="list-disc pl-5 mb-4">
-            <li>"서비스"란 회사가 제공하는 모든 서비스를 의미합니다.</li>
-            <li>"이용자"란 회사의 서비스를 이용하는 모든 사용자를 의미합니다.</li>
+            <li>"Service" refers to all services provided by the Company.</li>
+            <li>"User" refers to all users who use the Company's services.</li>
           </ul>
           
-          <h4 class="font-bold mb-2">제3조 (약관의 효력 및 변경)</h4>
-          <p>본 약관은 서비스를 이용하고자 하는 모든 이용자에 대하여 그 효력을 발생합니다.</p>
+          <h4 class="font-bold mb-2">Article 3 (Effect and Changes of Terms)</h4>
+          <p>These terms and conditions take effect for all users who wish to use the service.</p>
         </div>
       </div>
     </div>
@@ -1099,7 +1221,7 @@
     <div id="privacy-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
       <div class="bg-white rounded-xl max-w-2xl mx-4 p-6 max-h-[80vh] overflow-y-auto">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold text-gray-900">개인정보처리방침</h3>
+          <h3 class="text-xl font-bold text-gray-900">Privacy Policy</h3>
           <button onclick="closeModal('privacy')" class="text-gray-500 hover:text-gray-700">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -1107,11 +1229,11 @@
           </button>
         </div>
         <div class="prose prose-sm text-gray-600">
-          <h4 class="font-bold mb-2">1. 개인정보의 수집 및 이용 목적</h4>
-          <p class="mb-4">회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+          <h4 class="font-bold mb-2">1. Purpose of Collection and Use of Personal Information</h4>
+          <p class="mb-4">The Company processes personal information for the following purposes. The personal information being processed will not be used for any other purposes, and if the purpose of use changes, necessary measures will be taken in accordance with Article 18 of the Personal Information Protection Act, such as obtaining separate consent.</p>
           
-          <h4 class="font-bold mb-2">2. 개인정보의 처리 및 보유기간</h4>
-          <p class="mb-4">회사는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.</p>
+          <h4 class="font-bold mb-2">2. Processing and Retention Period of Personal Information</h4>
+          <p class="mb-4">The Company processes and retains personal information within the retention and use period of personal information in accordance with laws or as agreed upon when collecting personal information from the information subject.</p>
         </div>
       </div>
     </div>
@@ -1119,7 +1241,7 @@
     <div id="cookie-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
       <div class="bg-white rounded-xl max-w-2xl mx-4 p-6 max-h-[80vh] overflow-y-auto">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold text-gray-900">쿠키 정책</h3>
+          <h3 class="text-xl font-bold text-gray-900">Cookie Policy</h3>
           <button onclick="closeModal('cookie')" class="text-gray-500 hover:text-gray-700">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -1127,21 +1249,21 @@
           </button>
         </div>
         <div class="prose prose-sm text-gray-600">
-          <h4 class="font-bold mb-2">1. 쿠키의 사용 목적</h4>
-          <p class="mb-4">회사는 이용자의 편의를 위해 쿠키를 사용하여 웹사이트 방문 기록을 남겨 다음의 용도로 사용합니다.</p>
+          <h4 class="font-bold mb-2">1. Purpose of Using Cookies</h4>
+          <p class="mb-4">The Company uses cookies to record website visits for user convenience and uses them for the following purposes.</p>
           <ul class="list-disc pl-5 mb-4">
-            <li>고객의 접속 빈도나 방문 시간 등을 분석</li>
-            <li>이용자의 취향과 관심분야 파악</li>
-            <li>각종 이벤트 참여 정도 및 방문 회수 파악</li>
+            <li>Analysis of frequency of customer access and visit times</li>
+            <li>Understanding user preferences and areas of interest</li>
+            <li>Tracking participation in various events and number of visits</li>
           </ul>
           
-          <h4 class="font-bold mb-2">2. 쿠키의 설치/운영 및 거부</h4>
-          <p>이용자는 쿠키 설치에 대한 선택권을 가지고 있습니다. 웹브라우저에서 옵션을 설정함으로써 모든 쿠키를 허용하거나, 쿠키가 저장될 때마다 확인을 거치거나, 아니면 모든 쿠키의 저장을 거부할 수도 있습니다.</p>
+          <h4 class="font-bold mb-2">2. Installation/Operation and Rejection of Cookies</h4>
+          <p>Users have the option regarding cookie installation. You can allow all cookies, verify each time a cookie is saved, or reject all cookies by setting options in your web browser.</p>
         </div>
       </div>
     </div>
 
-    <!-- 모달 제어를 위한 스크립트 -->
+    <!-- Script for Modal Control -->
     <script>
       function openModal(id) {
         document.getElementById(`${id}-modal`).classList.remove('hidden');
@@ -1153,7 +1275,7 @@
         document.body.style.overflow = 'auto';
       }
       
-      // ESC 키로 모달 닫기
+      // Close modal with ESC key
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           document.querySelectorAll('[id$="-modal"]').forEach(modal => {
@@ -1163,7 +1285,7 @@
         }
       });
       
-      // 모달 외부 클릭시 닫기
+      // Close modal when clicking outside
       document.querySelectorAll('[id$="-modal"]').forEach(modal => {
         modal.addEventListener('click', function(e) {
           if (e.target === this) {
@@ -1174,64 +1296,51 @@
       });
     </script>
 
-    <!-- 햄버거 메뉴 버튼 추가 -->
-    <button class="lg:hidden" id="mobile-menu-button">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-
-    <!-- 모바일 메뉴 -->
-    <div class="hidden lg:hidden" id="mobile-menu">
-      <!-- 모바일 메뉴 내용 -->
+    <!-- Thank You Modal -->
+    <div id="thank-you-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center">
+      <div class="bg-white rounded-xl max-w-lg mx-4 p-8 text-center">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Thank You!</h2>
+        <p class="text-gray-600 mb-6">Your inquiry has been submitted successfully. Our team will get back to you within 24 hours.</p>
+        <button onclick="closeThankYouModal()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all">
+          Close
+        </button>
+      </div>
     </div>
 
-    <!-- JavaScript 추가 -->
     <script>
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-
-      mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+      // Show thank you modal if URL has ?thanks=true
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.search.includes('thanks=true')) {
+          document.getElementById('thank-you-modal').classList.remove('hidden');
+        }
       });
-
-      // 모바일 메뉴 링크 클릭시 메뉴 닫기
-      document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.add('hidden');
-        });
-      });
+      
+      function closeThankYouModal() {
+        document.getElementById('thank-you-modal').classList.add('hidden');
+        // Remove the query parameter
+        history.replaceState(null, '', window.location.pathname);
+      }
+      
+      // Company Profile Download Function
+      function downloadCompanyProfile(event) {
+        event.preventDefault();
+        
+        // For debugging - check if file exists
+        console.log("Attempting to download:", COMPANY_PROFILE_PATH);
+        
+        const link = document.createElement('a');
+        link.href = COMPANY_PROFILE_PATH;
+        link.download = 'Summit_Exports_LTD_Introduction.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
     </script>
-
-<script>
-function handleSubmit(event) {
-  event.preventDefault();
-  
-  // 폼 데이터 가져오기
-  const company = document.getElementById('company').value.trim();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const type = document.getElementById('type').value.trim();
-  const message = document.getElementById('message').value.trim();
-
-  // 이메일 제목과 본문 구성
-  const subject = `[Summit 문의] ${company} - ${type}`;
-  const body = `회사명: ${company}\n담당자: ${name}\n이메일: ${email}\n문의유형: ${type}\n\n문의내용:\n${message}`;
-
-  // mailto 링크 생성
-  const mailtoLink = `mailto:kevinj@summitexportslimited.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  // window.open 대신 location.href 사용
-  window.location.href = mailtoLink;
-  
-  // 폼 초기화
-  event.target.reset();
-  return false;
-}
-
-</script>
-
-
   </div>
 </body>
 </html>
