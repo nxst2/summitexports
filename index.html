@@ -20,6 +20,7 @@
     .glass-effect {
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
@@ -242,13 +243,15 @@
       
       
       .mobile-card {
-        background-color: white;
+        background-color: transparent;
         border-radius: 16px;
-        padding: 1.25rem;
+        padding: 0.75rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         height: 100%;
         display: flex;
         flex-direction: column;
+        margin: 0.5rem;
+        width: calc(100% - 1rem);
       }
       
       .mobile-card-body {
@@ -309,6 +312,18 @@
         width: 32px !important;
         height: 32px !important;
       }
+      
+      /* 컨테이너 패딩 조정 */
+      .container.mx-auto {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      
+      /* 섹션 패딩 조정 */
+      section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
     }
   </style>
   <!-- Favicon -->
@@ -318,6 +333,43 @@
   <script>
     // Company Profile Configuration - Edit this to update the profile URL site-wide
     const COMPANY_PROFILE_PATH = "./download/Summit_Exports_LTD_Introduction_ENG.pdf";
+    
+    // 페이지 로드 후 실행
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+          mobileMenu.classList.toggle('hidden');
+          document.body.classList.toggle('overflow-hidden'); // 모바일 메뉴 열릴 때 스크롤 방지
+        });
+        
+        // 모바일 메뉴 링크 클릭 시 메뉴 닫기
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+          });
+        });
+      }
+      
+      // 쿼리 파라미터 thanks=true일 경우 감사 메시지 표시
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('thanks') === 'true') {
+        const thanksMessage = document.getElementById('thanksMessage');
+        if (thanksMessage) {
+          thanksMessage.classList.remove('hidden');
+          setTimeout(() => {
+            thanksMessage.classList.add('opacity-0');
+            setTimeout(() => {
+              thanksMessage.classList.add('hidden');
+            }, 500);
+          }, 5000);
+        }
+      }
+    });
   </script>
 </head>
 <body class="font-sans antialiased bg-gray-50">
@@ -367,7 +419,7 @@
       </div>
       
       <!-- 모바일 메뉴 -->
-      <div class="hidden lg:hidden bg-white/95 absolute left-0 right-0 p-4 shadow-lg" id="mobile-menu">
+      <div class="hidden lg:hidden bg-white/95 absolute left-0 right-0 p-4 shadow-lg z-50" id="mobile-menu">
         <div class="flex flex-col space-y-2 p-2">
           <a href="#about" class="mobile-menu-link">
             <svg class="w-5 h-5 mobile-icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -460,42 +512,42 @@
           </a>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mobile-gap-md mt-20">
-          <div class="glass-effect rounded-xl p-6 hover-scale mobile-card">
-            <div class="w-16 h-16 mx-auto mb-4 mobile-icon-lg">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 sm:mt-20 px-2 sm:px-0">
+          <div class="glass-effect rounded-xl p-4 sm:p-6 hover-scale">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4">
               <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
               </svg>
             </div>
-            <h3 class="text-white font-semibold mb-2 mobile-h3">IT Consulting</h3>
-            <p class="text-white/80 text-sm mobile-text-base">Cutting-edge Technology Solutions</p>
+            <h3 class="text-white font-semibold mb-2 text-lg sm:text-xl">IT Consulting</h3>
+            <p class="text-white/80 text-sm">Cutting-edge Technology Solutions</p>
           </div>
-          <div class="glass-effect rounded-xl p-6 hover-scale mobile-card">
-            <div class="w-16 h-16 mx-auto mb-4 mobile-icon-lg">
+          <div class="glass-effect rounded-xl p-4 sm:p-6 hover-scale">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4">
               <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
               </svg>
             </div>
-            <h3 class="text-white font-semibold mb-2 mobile-h3">E-commerce</h3>
-            <p class="text-white/80 text-sm mobile-text-base">Online Distribution Optimization</p>
+            <h3 class="text-white font-semibold mb-2 text-lg sm:text-xl">E-commerce</h3>
+            <p class="text-white/80 text-sm">Online Distribution Optimization</p>
           </div>
-          <div class="glass-effect rounded-xl p-6 hover-scale mobile-card">
-            <div class="w-16 h-16 mx-auto mb-4 mobile-icon-lg">
+          <div class="glass-effect rounded-xl p-4 sm:p-6 hover-scale">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4">
               <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
               </svg>
             </div>
-            <h3 class="text-white font-semibold mb-2 mobile-h3">K-Brand</h3>
-            <p class="text-white/80 text-sm mobile-text-base">Global Brand Strategy</p>
+            <h3 class="text-white font-semibold mb-2 text-lg sm:text-xl">K-Brand</h3>
+            <p class="text-white/80 text-sm">Global Brand Strategy</p>
           </div>
-          <div class="glass-effect rounded-xl p-6 hover-scale mobile-card">
-            <div class="w-16 h-16 mx-auto mb-4 mobile-icon-lg">
+          <div class="glass-effect rounded-xl p-4 sm:p-6 hover-scale">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4">
               <svg class="w-full h-full text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
             </div>
-            <h3 class="text-white font-semibold mb-2 mobile-h3">K-goods</h3>
-            <p class="text-white/80 text-sm mobile-text-base">Premium Product Export</p>
+            <h3 class="text-white font-semibold mb-2 text-lg sm:text-xl">K-goods</h3>
+            <p class="text-white/80 text-sm">Premium Product Export</p>
           </div>
         </div>
       </div>
@@ -509,20 +561,20 @@
     <!-- About Section -->
     <section id="about" class="min-h-[70vh] py-20 bg-white">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-          <div class="relative">
-            <img src="img/hongkong.jpg" alt="Hong Kong" class="rounded-2xl shadow-2xl hover-scale">
-            <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-lg w-64">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div class="relative mx-auto max-w-lg lg:max-w-none">
+            <img src="img/hongkong.jpg" alt="Hong Kong" class="rounded-2xl shadow-2xl hover-scale w-full">
+            <div class="absolute -bottom-8 -right-8 bg-white p-4 sm:p-6 rounded-2xl shadow-lg w-48 sm:w-64">
               <h3 class="text-blue-600 font-bold mb-2">20+ Years</h3>
               <p class="text-sm text-gray-600">Global Trade Experience</p>
             </div>
           </div>
-          <div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Hong Kong-based Global Experts</h2>
-            <p class="text-lg text-gray-600 leading-relaxed mb-8">
+          <div class="mt-16 lg:mt-0">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Hong Kong-based Global Experts</h2>
+            <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-8">
               Our Hong Kong-based company specializes in IT and E-commerce consulting, connecting K-Brands and K-goods to the global market. We leverage Hong Kong's strategic position as Asia's financial hub and our global network to support Korean companies in their internationalization.
             </p>
-            <div class="grid grid-cols-2 gap-6 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
               <div class="flex items-center">
                 <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
                   <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1199,7 +1251,7 @@
     <!-- Contact Section -->
     <section id="contact" class="min-h-screen py-20 bg-gray-900 text-white">
       <div class="container mx-auto px-2 sm:px-4 lg:px-8 max-w-full">
-        <div class="max-w-4xl mx-auto bg-gray-800 rounded-2xl p-12 shadow-2xl">
+        <div class="max-w-4xl mx-auto bg-gray-800 rounded-2xl p-6 sm:p-12 shadow-2xl">
           <div class="text-center mb-12">
             <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
             <p class="text-gray-400">Our team will get back to you within 24 hours</p>
@@ -1211,7 +1263,7 @@
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_next" value="https://summitexportslimited.com/?thanks=true">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div>
                 <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company Name</label>
                 <input 
