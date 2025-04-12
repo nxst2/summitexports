@@ -348,6 +348,26 @@
         -webkit-hyphens: auto;
         hyphens: auto;
       }
+      
+    
+      #hero {
+        padding-top: 7rem !important;
+      }
+      
+     
+      #hero .container {
+        padding-top: 2rem !important;
+      }
+      
+      /* 햄버거 버튼 색상 조정 */
+      .mobile-menu-btn svg {
+        stroke: white !important;
+      }
+      
+      /* 헤더 스크롤 시 햄버거 버튼 색상 변경 */
+      .header-scrolled .mobile-menu-btn svg {
+        stroke: #2563eb !important;
+      }
     }
   </style>
   <!-- Favicon -->
@@ -362,6 +382,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       const mobileMenuButton = document.getElementById('mobile-menu-button');
       const mobileMenu = document.getElementById('mobile-menu');
+      const header = document.querySelector('.header');
       
       if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', function() {
@@ -378,6 +399,15 @@
           });
         });
       }
+      
+      // 스크롤 이벤트 감지
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+      });
       
       // 쿼리 파라미터 thanks=true일 경우 감사 메시지 표시
       const urlParams = new URLSearchParams(window.location.search);
