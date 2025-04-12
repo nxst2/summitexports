@@ -117,6 +117,13 @@
       background-color: #f3f4f6;
     }
     
+    /* 텍스트 줄바꿈 기본 스타일 */
+    .break-words {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
     
     @media (max-width: 1024px) {
       .header-container {
@@ -324,6 +331,23 @@
         padding-top: 3rem !important;
         padding-bottom: 3rem !important;
       }
+      
+      /* 카드 내 패딩 조정 */
+      .bg-gray-800.p-8 {
+        padding: 1.25rem !important;
+      }
+      
+      /* 모바일 텍스트 최적화 */
+      .break-words {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        word-break: break-word;
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
     }
   </style>
   <!-- Favicon -->
@@ -482,7 +506,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center relative overflow-hidden pt-24 md:pt-16">
+    <section id="hero" class="min-h-screen flex items-center relative overflow-hidden pt-24 md:pt-32">
       <div class="absolute inset-0 z-0">
         <img src="img/hongkong.jpg" 
              srcset="img/hongkong-mobile.jpg 400w,
@@ -643,26 +667,26 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">System Integration/Implementation/Management</h3>
-            <p class="text-gray-400 mb-6">One-stop service from designing IT infrastructure optimized for business needs to implementation and stable operation</p>
+            <h3 class="text-xl font-bold mb-4 break-words hyphens-auto">System Integration/<wbr>Implementation/<wbr>Management</h3>
+            <p class="text-gray-400 mb-6 break-words">One-stop service from designing IT infrastructure optimized for business needs to implementation and stable operation</p>
             <ul class="space-y-2 text-gray-400">
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Cloud Infrastructure Setup
+                <span>Cloud Infrastructure Setup</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Server Optimization & Management
+                <span>Server Optimization & Management</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Data Security Solutions
+                <span>Data Security Solutions</span>
               </li>
             </ul>
           </div>
@@ -672,55 +696,55 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">Application Software Development</h3>
-            <p class="text-gray-400 mb-6">Maximizing efficiency and automating business processes through customized software development</p>
+            <h3 class="text-xl font-bold mb-4 break-words hyphens-auto">Application Software Development</h3>
+            <p class="text-gray-400 mb-6 break-words">Maximizing efficiency and automating business processes through customized software development</p>
             <ul class="space-y-2 text-gray-400">
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Web/Mobile Applications
+                <span>Web/Mobile Applications</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                ERP/CRM System Implementation
+                <span>ERP/CRM System Implementation</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                User Experience Optimization
+                <span>User Experience Optimization</span>
               </li>
             </ul>
           </div>
           <div class="bg-gray-800 p-8 rounded-2xl hover-scale">
             <div class="w-16 h-16 bg-green-600/20 rounded-xl flex items-center justify-center mb-6">
               <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4">AI/VR/Metaverse</h3>
-            <p class="text-gray-400 mb-6">Enhancing future competitiveness by building innovative business solutions using the latest technologies</p>
+            <h3 class="text-xl font-bold mb-4 break-words hyphens-auto">AI/VR/Metaverse</h3>
+            <p class="text-gray-400 mb-6 break-words">Enhancing future competitiveness by building innovative business solutions using the latest technologies</p>
             <ul class="space-y-2 text-gray-400">
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                AI-based Analytics Solutions
+                <span>AI-based Analytics Solutions</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                VR/AR Marketing Platforms
+                <span>VR/AR Marketing Platforms</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-400 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Metaverse Business Environment Setup
+                <span>Metaverse Business Environment Setup</span>
               </li>
             </ul>
           </div>
@@ -833,19 +857,19 @@
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Product Customization
+                <span>Product Customization</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Production Process Optimization
+                <span>Production Process Optimization</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Quality Management Systems
+                <span>Quality Management Systems</span>
               </li>
             </ul>
           </div>
@@ -862,19 +886,19 @@
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Store Design Optimization
+                <span>Store Design Optimization</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Sales Strategy Development
+                <span>Sales Strategy Development</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Customer Experience Optimization
+                <span>Customer Experience Optimization</span>
               </li>
             </ul>
           </div>
@@ -891,19 +915,19 @@
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Entry Strategy Development
+                <span>Entry Strategy Development</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Performance Analysis and Improvement
+                <span>Performance Analysis and Improvement</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-600 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Data-Driven Decision Making
+                <span>Data-Driven Decision Making</span>
               </li>
             </ul>
           </div>
